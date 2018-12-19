@@ -6,10 +6,13 @@ import router from './router'
 //import store from './store/index.js'
 //import 'bootstrap/dist/css/bootstrap.css'
 import './lib/mui/css/mui.min.css'
-import { Header } from 'mint-ui'
+import './lib/mui/css/icons-extra.css'
+import { Header } from 'mint-ui' // 按需加载  还要再 babelrc配置 js的话 在对应组件引入组件就行了
 Vue.component(Header.name, Header);
-// import { Button } from 'mint-ui' // 按需加载  还要再 babelrc配置 js的话 在对应组件引入组件就行了
-// Vue.component(Button.name, Button)
+import { Swipe, SwipeItem } from 'mint-ui';
+Vue.component(Swipe.name, Swipe);
+Vue.component(SwipeItem.name, SwipeItem);
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

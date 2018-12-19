@@ -1,11 +1,10 @@
 <template>
-  <div style="height:500px;">
-index
+  <div>
+member
   </div>
 </template>
 
 <script>
-import { Toast } from 'mint-ui';
 export default {
   data () {
     return {
@@ -14,13 +13,10 @@ export default {
   },
   components: {
 
-  },
-  created() {
-  },
-  methods: {
   }
 }
 </script>
 
-<style lang='stylus'>
+<style lang='stylus' scoped>
+
 </style>
