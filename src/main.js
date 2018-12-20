@@ -12,6 +12,8 @@ Vue.component(Header.name, Header);
 import { Swipe, SwipeItem } from 'mint-ui';
 Vue.component(Swipe.name, Swipe);
 Vue.component(SwipeItem.name, SwipeItem);
+import { Button } from 'mint-ui'
+Vue.component(Button.name, Button);
 
 Vue.config.productionTip = false
 

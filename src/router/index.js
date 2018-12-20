@@ -5,6 +5,8 @@ import Login from 'pages/Login'
 import Member from 'pages/Member'
 import Shopcar from 'pages/Shopcar'
 import Search from 'pages/Search'
+import NewsList from 'pages/News/NewsList'
+import NewsInfo from 'pages/News/NewsInfo'
 
 Vue.use(Router)
 
@@ -20,8 +22,16 @@ export default new Router({
     },
     {
       path: '/home',
-      component: Home
+      component: Home,
+      // children: [ // 用children要用 router-view
+      //   {
+      //     path: 'newlist',
+      //     component: NewsList
+      //   }
+      // ]
     },
+    { path: '/home/newslist', component: NewsList },
+    { path: '/home/newsinfo/:id', component: NewsInfo },
     {
       path: '/member',
       component: Member
@@ -33,7 +43,7 @@ export default new Router({
     {
       path: '/search',
       component: Search
-    },
+    }
   ],
   linkExactActiveClass: 'mui-active'
 })
