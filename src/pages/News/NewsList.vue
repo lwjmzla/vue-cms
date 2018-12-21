@@ -2,19 +2,20 @@
 
  <div class="list_wrap" ref="list_wrap">
      <ul class="mui-table-view">
-				<li class="mui-table-view-cell mui-media" v-for="(item) in  commentList" :key="item.commentId">
-					<router-link :to="'/home/newsinfo/'+ item.commentId ">
-						<img class="mui-media-object mui-pull-left" :src="item.user.avatarUrl">
-						<div class="mui-media-body">
-							{{item.user.nickname}}
-							<p class='mui-ellipsis'>
-                                <span>发表时间:{{item.time | dataFormat}}</span>
-                                <span>喜欢指数:{{item.likedCount}}</span>
-                            </p>
-						</div>
-					</router-link>
-				</li>				
-			</ul>
+      <li class="mui-table-view-cell mui-media" v-for="item in newslist" :key="item.id">
+        <router-link :to="'/home/newsinfo/' + item.id">
+          <img class="mui-media-object mui-pull-left" :src="item.img_url">
+          <div class="mui-media-body">
+            <h1>{{ item.title }}</h1>
+            <p class='mui-ellipsis'>
+              <span>发表时间：{{ item.add_time | dateFormat }}</span>
+              <span>点击：{{item.click}}次</span>
+            </p>
+          </div>
+        </router-link>
+      </li>
+
+    </ul>
      </div>  
 </template>
 
@@ -22,20 +23,34 @@
 <script>
 import BScroll from 'better-scroll'
 import axios from 'axios'
-import dayjs from 'dayjs'
+import { Toast } from 'mint-ui';
 export default {
   name: 'newslist',
   data() {
     return {
-      commentList: []
+      newslist: []
     }
   },
-  methods: {},
-  filters: {
-    dataFormat(value) {
-        return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
+  methods: {
+    getNewsList() {
+      // 获取新闻列表
+      axios.get("http://www.liulongbin.top:3005/api/getnewslist").then(result => {
+        result = result.data
+        console.log(result)
+        if (result.status === 0) {
+          // 如果没有失败，应该把数据保存到 data 上
+          this.newslist = result.message;
+        } else {
+          Toast("获取新闻列表失败！");
+        }
+      });
     }
   },
+  // filters: {
+  //   dateFormat(value) {
+  //     return dayjs(value).format('YYYY-MM-DD HH:mm:ss')
+  //   }
+  // },
   activated () {
       console.log('activated')
     //   if (!this.scroll) {
@@ -44,24 +59,8 @@ export default {
     //         })
     //   }
   },
-  deactivated () {
-    //   console.log('deactivated')
-    //   this.scroll.destroy()
-    //   console.log(this.scroll)
-  },
   created() {
-    //由于找的是网易音乐的评论接口,需要传递id,这里是模拟的,直接固定了一首歌曲id
-    axios
-      .get(`https://autumnfish.cn/comment/music?id=255294&limit=5`)
-      .then(response => {
-        //把评论的时间戳转化为时间 这里也可以定义全局的过滤器来过滤时间
-        // response.data.hotComments.forEach(element => {
-        // element.time=new Date(element.time).toLocaleDateString()
-        // .replace(/\//g, "-") + " " + new Date(element.time).toTimeString().substr(0, 8);
-        // });
-        //console.log(response);
-        this.commentList = response.data.hotComments
-      })
+    this.getNewsList()
   },
   mounted() {
     this.scroll = new BScroll(this.$refs.list_wrap, {
@@ -69,7 +68,7 @@ export default {
     })
   },
   watch: {
-    commentList(newVal) {
+    newslist(newVal) {
         this.$nextTick(() => {
             setTimeout(() => {
                 this.scroll.refresh()
@@ -82,13 +81,17 @@ export default {
 
 
 <style lang="scss" scoped>
-.mui-media-body {
-  font-size: 14px;
-  color: rgb(64, 61, 245);
-  .mui-ellipsis {
-    font-size: 13px;
-    display: flex;
-    justify-content: space-between;
+.mui-table-view {
+  li {
+    h1 {
+      font-size: 14px;
+    }
+    .mui-ellipsis {
+      font-size: 12px;
+      color: #226aff;
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }
 .list_wrap {

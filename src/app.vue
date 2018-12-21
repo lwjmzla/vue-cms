@@ -7,7 +7,7 @@
 		</mt-header>
     <div class="content">
 			<transition>
-				<keep-alive>
+				<keep-alive exclude="newsinfo,photoinfo">
 					<router-view></router-view>
 				</keep-alive>
 			</transition>
