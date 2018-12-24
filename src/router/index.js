@@ -9,7 +9,10 @@ import NewsList from 'pages/News/NewsList'
 import NewsInfo from 'pages/News/NewsInfo'
 import PhotoList from 'pages/Photos/PhotoList.vue'
 import PhotoInfo from 'pages/Photos/PhotoInfo.vue'
-
+import GoodsList from 'pages/Goods/GoodsList.vue'
+import GoodsInfo from 'pages/Goods/GoodsInfo.vue'
+import GoodsComment from 'pages/Goods/GoodsComment.vue'
+import GoodsDesc from 'pages/Goods/GoodsDesc.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -36,6 +39,10 @@ export default new Router({
     { path: '/home/newsinfo/:id', component: NewsInfo },
     { path: '/home/photolist', component: PhotoList },
     { path: '/home/photoinfo/:id', component: PhotoInfo },
+    { path: '/home/goodslist', component: GoodsList },
+    { path: '/home/goodsinfo/:id', component: GoodsInfo, name: 'goodsinfo'},
+    { path: '/home/goodscomment/:id', component: GoodsComment, name: 'goodscomment'},
+    { path: '/home/goodsdesc/:id', component: GoodsDesc, name: 'goodsdesc'},
     {
       path: '/member',
       component: Member
