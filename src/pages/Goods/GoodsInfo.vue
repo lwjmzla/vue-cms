@@ -145,13 +145,12 @@ export default {
       var goodsinfo = {
         id: this.id,
         //count: this.selectedCount,
-        count: this.$refs.numbox.$refs.numbox.value,
+        count: parseInt(this.$refs.numbox.$refs.numbox.value),
         price: this.goodsinfo.sell_price,
-        selected: true
+        //selected: true
       };
-      console.log(this.$refs.numbox.$refs.numbox.value)
       // 调用 store 中的 mutations 来将商品加入购物车
-      // this.$store.commit("addToCar", goodsinfo);
+      this.$store.commit("addGoods", goodsinfo);
     },
     beforeEnter(el) {
       el.style.transform = "translate(0, 0)";

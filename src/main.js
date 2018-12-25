@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import app from './app.vue'
 import router from './router'
-//import store from './store/index.js'
+import store from './store/index.js'
 //import 'bootstrap/dist/css/bootstrap.css'
 import './lib/mui/css/mui.min.css'
 import './lib/mui/css/icons-extra.css'
@@ -37,6 +37,7 @@ Vue.filter('dateFormat', function(value) {
 new Vue({
   el: '#app',
   router,
+  store,
   components: { app },
   template: '<app/>'
   // render: function (createElements) {
